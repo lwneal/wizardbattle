@@ -10,7 +10,7 @@ Read the spells carefully."""
 
 DECISION_PROMPT = """Which wizard's spell should win? Answer "{}" or "{}" """
 
-DESCRIBE_PROMPT = """Describe vividly in three sentences the two spells, ending in victory for {}"""
+DESCRIBE_PROMPT = """Narrate vividly in three sentences the battle between the two spells, ending in victory for {}"""
 
 
 def decide_winner(name1, name2, spell1, spell2):

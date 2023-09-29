@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import wizards
 
 app = Flask(__name__)
 
@@ -19,9 +20,9 @@ def start_wizard_battle():
     name2 = "Bartholomew the Blue"
     spell2 = user_spell
     print("Starting battle between {} and {}".format(name1, name2))
-    winner = decide_winner(name1, name2, spell1, spell2)
+    winner = wizards.decide_winner(name1, name2, spell1, spell2)
     print("the winner is {}".format(winner))
-    description = describe_battle(name1, name2, spell1, spell2, winner)
+    description = wizards.describe_battle(name1, name2, spell1, spell2, winner)
     print("description: {}".format(description))
 
     return description
