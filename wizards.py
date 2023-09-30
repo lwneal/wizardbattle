@@ -75,19 +75,19 @@ def describe_battle(name1, spell1, name2, spell2, winner):
     answer = response.choices[0].message['content']
     return answer
 
-
+WIZARD_NAMES = [
+    "Ignatius the Red",
+    "Bartholomew the Blue",
+    "Morgana of the West",
+    "Xanthus the Enchanter",
+    "Ysor the Mystical",
+    "Zorander the Wise",
+    "Frostweaver the Silent",
+    "Thaumaturge Talbot",
+    "Pyromancer Wyndham",
+]
 def get_random_wizards(num_wizards):
-    names = random.sample([
-        "Ignatius the Red",
-        "Bartholomew the Blue",
-        "Morgana of the West",
-        "Xanthus the Enchanter",
-        "Ysor the Mystical",
-        "Zorander the Wise",
-        "Frostweaver the Silent",
-        "Thaumaturge Talbot",
-        "Pyromancer Wyndham",
-    ], num_wizards)
+    names = random.sample(WIZARD_NAMES, num_wizards)
     res = []
     for name in names:
         res.append({
@@ -95,6 +95,16 @@ def get_random_wizards(num_wizards):
             "portrait_filename": name.replace(" ", "_").lower() + ".jpg",
         })
     return res
+
+
+def get_random_opponent(name):
+    names = [n for n in WIZARD_NAMES if n != name]
+    opponent_name = random.choice(names)
+    opponent_portrait_filename = opponent_name.replace(" ", "_").lower() + ".jpg"
+    return {
+        "name": opponent_name,
+        "portrait_filename": opponent_portrait_filename,
+    }
 
 
 if __name__ == '__main__':

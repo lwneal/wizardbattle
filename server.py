@@ -25,7 +25,7 @@ def start_wizard_battle():
     spell1 = request.form['text']
     name1 = request.form['name']
 
-    name2 = "Ignatius the Red"
+    name2 = wizards.get_random_opponent(name1)['name']
     spell2 = "a destructive fireball of pure energy"
 
     if random.choice(range(20)) + 1 > 10:
@@ -38,6 +38,7 @@ def start_wizard_battle():
     print("description: {}".format(description))
 
     return render_template('battle.html', description=description, winner=winner, name1=name1, name2=name2, spell1=spell1, spell2=spell2)
+
 
 if __name__ == "__main__":
     app.run(debug=False)
