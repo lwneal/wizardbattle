@@ -1,25 +1,34 @@
+import flask
 from flask import Flask, render_template, request
 import random
 import wizards
 
 app = Flask(__name__)
 
+@app.route('/static/<path:path>')
+def serve_file(path):
+    # Serve static files from the 'static/' directory
+    return send_from_directory('static', path)
+
 @app.route("/")
 def home():
-    return render_template('index.html')
+    name1 = wizards.get_random_wizard()
+    name2 = wizards.get_random_wizard()
+    name3 = wizards.get_random_wizard()
+    return render_template('choose.html', name1=name1, name2=name2, name3=name3)
 
-@app.route('/<path:path>')
-def serve_file(path):
-    return app.send_static_file(path)
+@app.route("/battlebegin")
+def begin_battle():
+    name = flask.request.args.get('wizard') or wizards.get_random_wizard()
+    return render_template('battlebegin.html', name=name)
 
 @app.route("/start", methods=['POST'])
 def start_wizard_battle():
-    user_spell = request.form['text']
+    spell1 = request.form['text']
+    name1 = request.form['name']
 
-    name1 = "Ignatius the Red"
-    spell1 = "a destructive fireball of pure energy"
-    name2 = "Bartholomew the Blue"
-    spell2 = user_spell
+    name2 = "Ignatius the Red"
+    spell2 = "a destructive fireball of pure energy"
 
     if random.choice(range(20)) + 1 > 10:
         name1, spell1, name2, spell2 = name2, spell2, name1, spell1

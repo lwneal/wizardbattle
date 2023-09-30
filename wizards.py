@@ -1,4 +1,5 @@
 import os
+import random
 import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -73,6 +74,20 @@ def describe_battle(name1, spell1, name2, spell2, winner):
     )
     answer = response.choices[0].message['content']
     return answer
+
+
+def get_random_wizard():
+    return random.choice([
+        "Ignatius the Red",
+        "Bartholomew the Blue",
+        "Morgana of the West",
+        "Xanthus the Enchanter",
+        "Ysor the Mystical",
+        "Zorander the Wise",
+        "Frostweaver the Silent",
+        "Thaumaturge Talbot",
+        "Pyromancer Wyndham",
+    ])
 
 
 if __name__ == '__main__':

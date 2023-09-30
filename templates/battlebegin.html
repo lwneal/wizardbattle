@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wizard Battle</title>
+</head>
+<body>
+    <h1>{{name}} starts casting a spell...</h1>
+    <h4>What spell do you cast?</h4>
+    <form method="POST" action="/start">
+        <input type="hidden" name="name" value="{{name}}">
+        <textarea name="text" rows="4" cols="50"></textarea>
+        <br/>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
