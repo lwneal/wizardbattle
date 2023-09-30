@@ -31,6 +31,7 @@ def decide_winner(name1, name2, spell1, spell2):
             "role": "user",
             "content": DECISION_PROMPT,
     }]
+    print(messages)
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=messages,
@@ -60,6 +61,7 @@ def describe_battle(name1, spell1, name2, spell2, winner):
             "role": "user",
             "content": DESCRIBE_PROMPT.format(winner),
     }]
+    print(messages)
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=messages,
