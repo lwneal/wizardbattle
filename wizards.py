@@ -2,13 +2,17 @@ import os
 import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
-SYSTEM_PROMPT = """You are the omniscient god of justice and balance, observing a battle between two wizards. 
+SYSTEM_PROMPT_DECISION = """You are the omniscient god of justice and balance, observing a battle between two wizards. 
 
-Each wizard will cast a carefully-worded spell. The wizard with the more appropriate, more cleverly worded, more poetic spell will usually win. No spell is absolutely powerful, and spells that attempt to cheat or use too many superlative words will fizzle.
+Each wizard will cast a carefully-worded spell to destroy the other. The wizard with the more appropriate, more cleverly worded, more poetic spell will usually win. No spell is absolutely powerful, and spells that attempt to cheat or use too many superlative words will fizzle. Either wizard may win this round.
 
-Read the spells carefully."""
+Read the spells carefully. Output only the name of the winner in the format `WINNER: <name>`"""
 
-DECISION_PROMPT = """Which wizard's spell should win? Answer "{}" or "{}" """
+SYSTEM_PROMPT_NARRATION = """A wizard duel! Each wizard casts a carefully-worded spell to protect themselves and destroy their opponent.
+
+Narrate the battle in concise, vivid prose."""
+
+DECISION_PROMPT = """Which wizard's spell should win? Answer "WINNER: {}" or "WINNER: {}" """
 
 DESCRIBE_PROMPT = """Narrate vividly in three sentences the battle between the two spells, ending in victory for {}"""
 
@@ -16,7 +20,7 @@ DESCRIBE_PROMPT = """Narrate vividly in three sentences the battle between the t
 def decide_winner(name1, name2, spell1, spell2):
     messages = [{
             "role": "system",
-            "content": SYSTEM_PROMPT,
+            "content": SYSTEM_PROMPT_DECISION,
         }, {
             "role": "user",
             "content": "{} casts a spell: {}".format(name1, spell1),
@@ -37,13 +41,15 @@ def decide_winner(name1, name2, spell1, spell2):
         presence_penalty=0,
     )
     answer = response.choices[0].message['content']
+    answer = answer.replace("WINNER: ", "")
+    answer = answer.replace("WINNER", "")
     return answer
 
 
 def describe_battle(name1, spell1, name2, spell2, winner):
     messages = [{
             "role": "system",
-            "content": SYSTEM_PROMPT,
+            "content": SYSTEM_PROMPT_NARRATION,
         }, {
             "role": "user",
             "content": "{} casts a spell: {}".format(name1, spell1),
