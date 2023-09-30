@@ -12,10 +12,8 @@ def serve_file(path):
 
 @app.route("/")
 def home():
-    name1 = wizards.get_random_wizard()
-    name2 = wizards.get_random_wizard()
-    name3 = wizards.get_random_wizard()
-    return render_template('choose.html', name1=name1, name2=name2, name3=name3)
+    wizard_names = wizards.get_random_wizards(3)
+    return render_template('choose.html', wizards=wizard_names)
 
 @app.route("/battlebegin")
 def begin_battle():
@@ -34,9 +32,9 @@ def start_wizard_battle():
         name1, spell1, name2, spell2 = name2, spell2, name1, spell1
 
     print("Starting battle between {} and {}".format(name1, name2))
-    winner = wizards.decide_winner(name1, name2, spell1, spell2)
+    winner = wizards.decide_winner(name1, spell1, name2, spell2)
     print("the winner is {}".format(winner))
-    description = wizards.describe_battle(name1, name2, spell1, spell2, winner)
+    description = wizards.describe_battle(name1, spell1, name2, spell2, winner)
     print("description: {}".format(description))
 
     return render_template('battle.html', description=description, winner=winner, name1=name1, name2=name2, spell1=spell1, spell2=spell2)

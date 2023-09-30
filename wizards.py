@@ -18,7 +18,7 @@ DECISION_PROMPT = """Which wizard's spell should win? Answer "WINNER: {}" or "WI
 DESCRIBE_PROMPT = """Narrate vividly in three sentences the battle between the two spells, ending in victory for {}"""
 
 
-def decide_winner(name1, name2, spell1, spell2):
+def decide_winner(name1, spell1, name2, spell2):
     messages = [{
             "role": "system",
             "content": SYSTEM_PROMPT_DECISION,
@@ -76,8 +76,8 @@ def describe_battle(name1, spell1, name2, spell2, winner):
     return answer
 
 
-def get_random_wizard():
-    return random.choice([
+def get_random_wizards(num_wizards):
+    names = random.sample([
         "Ignatius the Red",
         "Bartholomew the Blue",
         "Morgana of the West",
@@ -87,7 +87,14 @@ def get_random_wizard():
         "Frostweaver the Silent",
         "Thaumaturge Talbot",
         "Pyromancer Wyndham",
-    ])
+    ], num_wizards)
+    res = []
+    for name in names:
+        res.append({
+            "name": name,
+            "portrait_filename": name.replace(" ", "_").lower() + ".jpg",
+        })
+    return res
 
 
 if __name__ == '__main__':
@@ -98,5 +105,5 @@ if __name__ == '__main__':
     print("Test battle between Red and Blue")
     winner = decide_winner(name1, name2, spell1, spell2)
     print("the winner is {}".format(winner))
-    description = describe_battle(name1, name2, spell1, spell2, winner)
+    description = describe_battle(name1, spell1, name2, spell2, winner)
     print("description: {}".format(description))

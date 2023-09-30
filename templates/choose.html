@@ -1,17 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Wizard Battle</title>
+  <title>Wizard Battle</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      font-size: 32pt;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      border: 1px solid #000;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px;
+      min-width: 160px;
+      text-align: center;
+      background: #ddd;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    @media (max-width: 500px) {
+      .card {
+        min-width: auto;
+        flex: 1 1 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Choose Your Wizard</h1>
-
-    <a href="/battlebegin?wizard={{name1}}">{{name1}}</a>
-    <br />
-    <a href="/battlebegin?wizard={{name2}}">{{name2}}</a>
-    <br />
-    <a href="/battlebegin?wizard={{name3}}">{{name3}}</a>
-    <br />
-
+  <h1>Choose Your Wizard</h1>
+  <div class="card-container">
+    {% for wizard in wizards %}
+    <div class="card">
+      <a href="/battlebegin?wizard={{ wizard.name }}" style="text-decoration: none;">
+          <img src="/static/{{ wizard.portrait_filename }}" alt="{{ wizard.name }}"><br/>
+        <p>{{ wizard.name }}</p>
+      </a> 
+    </div>
+    {% endfor %}
+  </div>
 </body>
 </html>
