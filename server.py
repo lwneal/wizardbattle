@@ -30,7 +30,7 @@ def start_wizard_battle():
     description = wizards.describe_battle(name1, name2, spell1, spell2, winner)
     print("description: {}".format(description))
 
-    return render_template('battle.html', description=description, winner=winner)
+    return render_template('battle.html', description=description, winner=winner, name1=name1, name2=name2, spell1=spell1, spell2=spell2)
 
 if __name__ == "__main__":
     app.run(debug=False)
