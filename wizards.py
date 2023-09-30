@@ -92,7 +92,7 @@ def get_random_wizards(num_wizards):
     for name in names:
         res.append({
             "name": name,
-            "portrait_filename": name.replace(" ", "_").lower() + ".jpg",
+            "portrait_filename": name.replace(" ", "_").lower() + ".mp4",
         })
     return res
 
@@ -100,7 +100,7 @@ def get_random_wizards(num_wizards):
 def get_random_opponent(name):
     names = [n for n in WIZARD_NAMES if n != name]
     opponent_name = random.choice(names)
-    opponent_portrait_filename = opponent_name.replace(" ", "_").lower() + ".jpg"
+    opponent_portrait_filename = opponent_name.replace(" ", "_").lower() + ".mp4"
     return {
         "name": opponent_name,
         "portrait_filename": opponent_portrait_filename,
