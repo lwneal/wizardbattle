@@ -1,0 +1,39 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 32pt;
+  background: black;
+  color: yellow;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  min-width: 160px;
+  text-align: center;
+  background: #101010;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 500px) {
+  .card {
+    min-width: auto;
+    flex: 1 1 100%;
+  }
+}
