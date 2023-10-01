@@ -6,14 +6,10 @@
     <style>
 .narration-line {
   opacity:0;
-  transition: opacity 1s;
-}
-#narration p {
   animation: fadeIn 1s;
 }
 #winner {
   opacity:0;
-  transition: opacity 1s;
 }
 
 @keyframes fadeIn {
@@ -28,8 +24,15 @@
 </head>
 <body>
     <h1>Wizard Battle</h1>
-    <p>{{name1}} casts: {{spell1}}</p>
-    <p>{{name2}} casts: {{spell2}}</p>
+    <div class="card" style="width:100%;display:flex;flex-direction:row;">
+      <video loop autoplay muted playsinline src="/static/{{ portrait_filename_1 }}" style="width: min(25vw, 256px); height: auto;"></video>
+      <p style="width:100%">{{name1}} casts:<br>{{spell1}}</p>
+    </div>
+    <div class="card" style="width:100%;display:flex;flex-direction:row;">
+      <p style="width:100%">{{name2}} casts:<br>{{spell2}}</p>
+      <video loop autoplay muted playsinline src="/static/{{ portrait_filename_2 }}" style="width: min(25vw, 256px); height: auto;"></video>
+    </div>
+
     <div id="narration">
     {% for line in narration %}
         <p class="narration-line">{{line}}</p>
@@ -38,8 +41,15 @@
     <p id="winner" style="display:flex; flex-direction:column; justify-content: center;">
         <p>Winner: {{winner}}</p>
         <br />
+        {% if player_wins %}
+          <video loop autoplay muted playsinline src="/static/{{ winner_portrait }}" style="width: min(30vw, 256px); height: auto;"></video>
+          <span>YOU HAVE WON</span>
+        {% else %}
+          <video loop autoplay muted playsinline src="/static/{{ winner_portrait }}" style="width: min(30vw, 256px); height: auto;"></video>
+          <span>YOU HAVE LOST</span>
+        {% endif %}
         <br />
-        <a href="/">PLAY AGAIN</a>
+        <a href="/" style="font-size:48pt">PLAY AGAIN</a>
     </p>
 </body>
 <script>
@@ -49,6 +59,7 @@ window.onload = function() {
     var winnerElement = document.querySelector('#winner');
     for(let i=0; i<narrationLines.length; i++) {
         setTimeout(function() {
+            let lineToFadeIn = narrationLines[i];
             narrationLines[i].style.opacity = 1;
         }, i * 1000);
     }

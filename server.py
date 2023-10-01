@@ -21,15 +21,20 @@ def begin_battle():
     placeholderspell = wizards.get_random_magic_spell()
     return render_template('battlebegin.html', name=name, placeholderspell=placeholderspell)
 
-@app.route("/round1", methods=['POST'])
+@app.route("/round1", methods=['GET', 'POST'])
 def start_wizard_battle():
+    if request.method == 'GET':
+        return flask.redirect('/')
     spell1 = request.form['text']
     name1 = request.form['name']
 
     name2 = wizards.get_random_opponent(name1)['name']
     spell2 = wizards.get_random_magic_spell()
 
+    playername, opponentname = name1, name2
+
     if random.choice(range(20)) + 1 > 10:
+        playername, opponentname = opponentname, playername
         name1, spell1, name2, spell2 = name2, spell2, name1, spell1
 
     print("Starting battle between {} and {}".format(name1, name2))
@@ -38,9 +43,16 @@ def start_wizard_battle():
     description = wizards.describe_battle(name1, spell1, name2, spell2, winner)
     print("description: {}".format(description))
 
-    narration = description.splitlines()
+    narration = description.replace('\n', '. ').split('. ')
 
-    return render_template('round1_results.html', description=description, winner=winner, name1=name1, name2=name2, spell1=spell1, spell2=spell2, narration=narration)
+    portrait_filename_1 = wizards.get_portrait_filename(name1)
+    portrait_filename_2 = wizards.get_portrait_filename(name2)
+
+    player_wins = winner.lower().startswith(playername.lower())
+    winner_name = playername if player_wins else opponentname
+    winner_portrait = wizards.get_portrait_filename(winner_name)
+
+    return render_template('round1_results.html', description=description, winner=winner, name1=name1, name2=name2, spell1=spell1, spell2=spell2, narration=narration, portrait_filename_1=portrait_filename_1, portrait_filename_2=portrait_filename_2, playername=playername, winner_portrait=winner_portrait, player_wins=player_wins)
 
 
 if __name__ == "__main__":
