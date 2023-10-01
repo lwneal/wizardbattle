@@ -44,6 +44,7 @@ def start_wizard_battle():
     print("description: {}".format(description))
 
     narration = description.replace('\n', '. ').split('. ')
+    narration = [line + "." if not line.endswith('.') else line for line in narration]
 
     portrait_filename_1 = wizards.get_portrait_filename(name1)
     portrait_filename_2 = wizards.get_portrait_filename(name2)
