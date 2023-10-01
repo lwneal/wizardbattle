@@ -4,12 +4,12 @@
     <link rel="stylesheet" href="static/style.css">
     <title>Wizard Battle</title>
 </head>
-<body>
+<body style="display:flex; justify-content:center">
     <h1>{{name}} starts casting a spell...</h1>
     <h4>What spell do you cast?</h4>
-    <form id="spellForm" method="POST" action="/round1">
+    <form id="spellForm" method="POST" action="/round1" style="display:flex; justify-content:center; flex-direction:column;">
         <input type="hidden" name="name" value="{{name}}">
-        <textarea id="spellInput" name="text" rows="4" cols="50" placeholder="{{placeholderspell}}"></textarea>
+        <textarea id="spellInput" name="text" rows="4" cols="50" placeholder="{{placeholderspell}}" style="font-size: 24px"></textarea>
         <br/>
         <button type="submit" id="submitBtn" style="border: none; background: none; cursor: pointer;">
             <img id="buttonImg" src="static/button-magic-01.jpg" height="128px" width="512px">
