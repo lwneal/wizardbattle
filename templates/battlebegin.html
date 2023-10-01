@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="static/style.css">
     <title>Wizard Battle</title>
 </head>
 <body>
     <h1>{{name}} starts casting a spell...</h1>
     <h4>What spell do you cast?</h4>
-    <form method="POST" action="/start">
+    <form id="spellForm" method="POST" action="/round1">
         <input type="hidden" name="name" value="{{name}}">
-        <textarea name="text" rows="4" cols="50"></textarea>
+        <textarea id="spellInput" name="text" rows="4" cols="50" placeholder="{{placeholderspell}}"></textarea>
         <br/>
-        <input type="submit" value="Submit">
+        <button type="submit" id="submitBtn" style="border: none; background: none; cursor: pointer;">
+            <img id="buttonImg" src="static/button-magic-01.jpg" height="128px" width="512px">
+        </button>
     </form>
+    <h5>Time remaining: <span id="timerseconds">20</span> seconds</h5>
+    <script>
+        var countdown = setInterval(function() {
+            var timer = document.getElementById('timerseconds');
+            timer.innerHTML = timer.innerHTML - 1;
+            if (timer.innerHTML <= 0) {
+                clearInterval(countdown);
+                if (document.getElementById('spellInput').value === '') {
+                    document.getElementById('spellInput').value = document.getElementById('spellInput').placeholder;
+                }
+                document.getElementById('spellForm').submit();
+            }
+        }, 1000);
+
+        var buttonImg = document.getElementById('buttonImg');
+        buttonImg.addEventListener('mouseover', function(){buttonImg.src = 'static/button-magic-02.jpg'});
+        buttonImg.addEventListener('mouseout', function(){buttonImg.src = 'static/button-magic-01.jpg'});
+        buttonImg.addEventListener('touchstart', function(){buttonImg.src = 'static/button-magic-02.jpg'});
+        buttonImg.addEventListener('touchend', function(){buttonImg.src = 'static/button-magic-01.jpg'});
+    </script>
 </body>
 </html>

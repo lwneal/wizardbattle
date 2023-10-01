@@ -18,15 +18,16 @@ def home():
 @app.route("/battlebegin")
 def begin_battle():
     name = flask.request.args.get('wizard') or wizards.get_random_wizard()
-    return render_template('battlebegin.html', name=name)
+    placeholderspell = wizards.get_random_magic_spell()
+    return render_template('battlebegin.html', name=name, placeholderspell=placeholderspell)
 
-@app.route("/start", methods=['POST'])
+@app.route("/round1", methods=['POST'])
 def start_wizard_battle():
     spell1 = request.form['text']
     name1 = request.form['name']
 
     name2 = wizards.get_random_opponent(name1)['name']
-    spell2 = "a destructive fireball of pure energy"
+    spell2 = wizards.get_random_magic_spell()
 
     if random.choice(range(20)) + 1 > 10:
         name1, spell1, name2, spell2 = name2, spell2, name1, spell1

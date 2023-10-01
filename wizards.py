@@ -107,6 +107,29 @@ def get_random_opponent(name):
     }
 
 
+def get_random_magic_spell():
+    return random.choice([
+        "Summon a bolt of lightning, striking from the sky",
+        "Transmute my opponent into stone",
+        "Summon a swarm of locusts to devour my opponent",
+        "Create a shield to reflect magical projectiles",
+        "Conjure a wall of fire surrounding my opponent",
+        "Summon a whirlwind to blow my opponent away",
+        "Rain fire from the sky upon my enemy",
+        "Summon deadly serpents to strike the enemy",
+        "Call forth a murmur of invisible butterflies causing confusion and insanity",
+        "Transform into a shadow, unseen by mortal eyes",
+        "Summon a typhoon in a teapot, drowning enemies in an unexpected deluge",
+        "Conjure a spectral moose for the perfect surprise charge",
+        "Mutate the enemy's weapon into a harmless carrot",
+        "Speed up time for myself, allowing quick movement or rest",
+        "Summon a swarm of singing bees, distracting and enchanting enemies",
+        "Plunge the surrounding area into an inescapable darkness",
+        "Turn my skin to diamond, reflecting and deflecting any attack",
+        "Release an irrisistible scent that compels the enemy to eat their own fingers",
+    ])
+
+
 if __name__ == '__main__':
     name1 = "Ignatius the Red"
     spell1 = "a destructive fireball of pure energy"
