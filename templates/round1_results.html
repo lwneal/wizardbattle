@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Wizard Battle</title>
+    <style>
+.narration-line {
+  opacity:0;
+  transition: opacity 1s;
+}
+#narration p {
+  animation: fadeIn 1s;
+}
+#winner {
+  opacity:0;
+  transition: opacity 1s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+</style>
+</head>
+<body>
+    <h1>Wizard Battle</h1>
+    <p>{{name1}} casts: {{spell1}}</p>
+    <p>{{name2}} casts: {{spell2}}</p>
+    <div id="narration">
+    {% for line in narration %}
+        <p class="narration-line">{{line}}</p>
+    {% endfor %}
+    </div>
+    <p id="winner" style="display:flex; flex-direction:column; justify-content: center;">
+        <p>Winner: {{winner}}</p>
+        <br />
+        <br />
+        <a href="/">PLAY AGAIN</a>
+    </p>
+</body>
+<script>
+// Fade in the narration line-by-line
+window.onload = function() {
+    var narrationLines = document.querySelectorAll('.narration-line');
+    var winnerElement = document.querySelector('#winner');
+    for(let i=0; i<narrationLines.length; i++) {
+        setTimeout(function() {
+            narrationLines[i].style.opacity = 1;
+        }, i * 1000);
+    }
+    setTimeout(function() {
+        winnerElement.style.opacity = 1;
+    }, narrationLines.length * 1000);
+}
+</script>
+</html>

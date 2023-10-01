@@ -38,7 +38,9 @@ def start_wizard_battle():
     description = wizards.describe_battle(name1, spell1, name2, spell2, winner)
     print("description: {}".format(description))
 
-    return render_template('battle.html', description=description, winner=winner, name1=name1, name2=name2, spell1=spell1, spell2=spell2)
+    narration = description.splitlines()
+
+    return render_template('round1_results.html', description=description, winner=winner, name1=name1, name2=name2, spell1=spell1, spell2=spell2, narration=narration)
 
 
 if __name__ == "__main__":
