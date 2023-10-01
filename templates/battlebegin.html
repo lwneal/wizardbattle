@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+</style>
     <link rel="stylesheet" href="static/style.css">
     <title>Wizard Battle</title>
 </head>
-<body style="display:flex; justify-content:center">
+<body style="display:flex; justify-content:center; background: black;">
     <h1>{{name}} starts casting a spell...</h1>
     <h4>What spell do you cast?</h4>
     <form id="spellForm" method="POST" action="/round1" style="display:flex; justify-content:center; flex-direction:column;">
@@ -16,10 +18,8 @@
         </button>
     </form>
     <h5>Time remaining: <span id="timerseconds">20</span> seconds</h5>
-    <footer id="footer" style="margin-top:200px">
-        <video playsinline autoplay muted loop src="static/magic_beams.mp4" type="video/mp4" style="width: 100vw; height:auto;">
-        </video>
-    </footer>
+    <video playsinline autoplay muted loop src="static/magic_beams.mp4" type="video/mp4" style="width: 100vw; height:auto; margin: 0; margin-top:512px; padding: 0px;">
+    </video>
     <script>
         var countdown = setInterval(function() {
             var timer = document.getElementById('timerseconds');
