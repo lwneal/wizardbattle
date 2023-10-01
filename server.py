@@ -34,7 +34,7 @@ def start_wizard_battle():
     playername, opponentname = name1, name2
 
     if random.choice(range(20)) + 1 > 10:
-        playername, opponentname = opponentname, playername
+        playername, opponentname = name2, name1
         name1, spell1, name2, spell2 = name2, spell2, name1, spell1
 
     print("Starting battle between {} and {}".format(name1, name2))
@@ -49,7 +49,10 @@ def start_wizard_battle():
     portrait_filename_1 = wizards.get_portrait_filename(name1)
     portrait_filename_2 = wizards.get_portrait_filename(name2)
 
+    print("Winner: {}".format(winner))
+    print("Player name: {}".format(playername))
     player_wins = winner.lower().startswith(playername.lower())
+    print("Player wins: {}".format(player_wins))
     winner_name = playername if player_wins else opponentname
     winner_portrait = wizards.get_portrait_filename(winner_name)
 
