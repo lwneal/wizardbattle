@@ -34,7 +34,6 @@ def start_wizard_battle():
     playername, opponentname = name1, name2
 
     if random.choice(range(20)) + 1 > 10:
-        playername, opponentname = name2, name1
         name1, spell1, name2, spell2 = name2, spell2, name1, spell1
 
     print("Starting battle between {} and {}".format(name1, name2))
