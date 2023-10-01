@@ -1,10 +1,15 @@
+@font-face {
+  font-family: "CormorantGaramond";
+  src: url("/static/CormorantGaramond-Medium.ttf") format("truetype");
+}
+
 body {
+  font-family: "CormorantGaramond", sans-serif;
+  font-size: 32pt;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  font-size: 32pt;
   background: black;
   color: yellow;
 }
