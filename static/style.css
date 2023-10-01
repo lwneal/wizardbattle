@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: black;
+  background: #1c1c1c;
   color: yellow;
 }
 .card-container {
