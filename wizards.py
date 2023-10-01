@@ -45,7 +45,8 @@ def decide_winner(name1, spell1, name2, spell2):
     answer = response.choices[0].message['content']
     answer = answer.replace("WINNER: ", "")
     answer = answer.replace("WINNER", "")
-    return answer
+    answer = answer.replace("the winner is ", "")
+    return answer.strip()
 
 
 def describe_battle(name1, spell1, name2, spell2, winner):
