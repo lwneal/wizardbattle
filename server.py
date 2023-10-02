@@ -27,6 +27,8 @@ def start_wizard_battle():
         return flask.redirect('/')
     spell1 = request.form['text']
     name1 = request.form['name']
+    if spell1.strip() == '':
+        spell1 = "Nothing, because they couldn't think of a spell!".format(name1)
 
     name2 = wizards.get_random_opponent(name1)['name']
     spell2 = wizards.get_random_magic_spell()
