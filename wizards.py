@@ -30,7 +30,7 @@ def decide_winner(name1, spell1, name2, spell2):
             "content": "{} casts a spell: {}".format(name2, spell2),
         }, {
             "role": "user",
-            "content": DECISION_PROMPT.format(name, name2),
+            "content": DECISION_PROMPT.format(name1, name2),
     }]
     print(messages)
     response = openai.ChatCompletion.create(
