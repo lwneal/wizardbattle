@@ -11,7 +11,7 @@
     <h4>What spell do you cast?</h4>
     <form id="spellForm" method="POST" action="/round1" style="display:flex; justify-content:center; flex-direction:column;">
         <input type="hidden" name="name" value="{{name}}">
-        <textarea id="spellInput" name="text" rows="6" cols="40" placeholder="{{placeholderspell}}" style="font-size: 32px"></textarea>
+        <textarea id="spellInput" name="text" rows="6" cols="40" placeholder="" style="font-size: 32px"></textarea>
         <br/>
         <button type="submit" id="submitBtn" style="border: none; background: none; cursor: pointer;">
             <img id="buttonImg" src="static/button-magic-01.jpg" height="128px" width="512px">
@@ -21,23 +21,37 @@
     <video playsinline autoplay muted loop src="static/magic_beams.mp4" type="video/mp4" style="width: 100vw; height:auto; margin: 0; margin-top:512px; padding: 0px;">
     </video>
     <script>
-        var countdown = setInterval(function() {
-            var timer = document.getElementById('timerseconds');
-            timer.innerHTML = timer.innerHTML - 1;
-            if (timer.innerHTML <= 0) {
-                clearInterval(countdown);
-                if (document.getElementById('spellInput').value === '') {
-                    document.getElementById('spellInput').value = document.getElementById('spellInput').placeholder;
-                }
-                document.getElementById('spellForm').submit();
-            }
-        }, 1000);
 
-        var buttonImg = document.getElementById('buttonImg');
-        buttonImg.addEventListener('mouseover', function(){buttonImg.src = 'static/button-magic-02.jpg'});
-        buttonImg.addEventListener('mouseout', function(){buttonImg.src = 'static/button-magic-01.jpg'});
-        buttonImg.addEventListener('touchstart', function(){buttonImg.src = 'static/button-magic-02.jpg'});
-        buttonImg.addEventListener('touchend', function(){buttonImg.src = 'static/button-magic-01.jpg'});
+// Update the countdown timer
+var countdown = setInterval(function() {
+    var timer = document.getElementById('timerseconds');
+    timer.innerHTML = timer.innerHTML - 1;
+    if (timer.innerHTML <= 0) {
+        clearInterval(countdown);
+        if (document.getElementById('spellInput').value === '') {
+            document.getElementById('spellInput').value = document.getElementById('spellInput').placeholder;
+        }
+        document.getElementById('spellForm').submit();
+    }
+}, 1000);
+
+
+// Handle the mouseover shiny button
+var buttonImg = document.getElementById('buttonImg');
+buttonImg.addEventListener('mouseover', function(){buttonImg.src = 'static/button-magic-02.jpg'});
+buttonImg.addEventListener('mouseout', function(){buttonImg.src = 'static/button-magic-01.jpg'});
+buttonImg.addEventListener('touchstart', function(){buttonImg.src = 'static/button-magic-02.jpg'});
+buttonImg.addEventListener('touchend', function(){buttonImg.src = 'static/button-magic-01.jpg'});
+
+
+// Update the placeholder
+var placeholderspells = JSON.parse('{{placeholderspells | tojson | safe}}');
+function updatePlaceholder() {
+    var index = Math.floor(Math.random() * placeholderspells.length);
+    document.getElementById('spellInput').placeholder = placeholderspells[index];
+}
+updatePlaceholder();
+setInterval(updatePlaceholder, 900);
     </script>
 </body>
 </html>

@@ -18,8 +18,8 @@ def home():
 @app.route("/battlebegin")
 def begin_battle():
     name = flask.request.args.get('wizard') or wizards.get_random_wizard()
-    placeholderspell = wizards.get_random_magic_spell()
-    return render_template('battlebegin.html', name=name, placeholderspell=placeholderspell)
+    placeholderspells = [wizards.get_random_magic_spell() for _ in range(10)]
+    return render_template('battlebegin.html', name=name, placeholderspells=placeholderspells)
 
 @app.route("/round1", methods=['GET', 'POST'])
 def start_wizard_battle():
