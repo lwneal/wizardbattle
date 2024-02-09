@@ -33,7 +33,7 @@ def decide_winner(name1, spell1, name2, spell2):
             "content": DECISION_PROMPT.format(name1, name2),
     }]
     print(messages)
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
         temperature=1,
@@ -64,7 +64,7 @@ def describe_battle(name1, spell1, name2, spell2, winner):
             "content": DESCRIBE_PROMPT.format(winner),
     }]
     print(messages)
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
         temperature=1,
