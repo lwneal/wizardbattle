@@ -42,7 +42,7 @@ def decide_winner(name1, spell1, name2, spell2):
         frequency_penalty=0,
         presence_penalty=0,
     )
-    answer = response.choices[0].message['content']
+    answer = response.choices[0].message.content
     answer = answer.replace("WINNER: ", "")
     answer = answer.replace("WINNER", "")
     answer = answer.replace("the winner is ", "")
@@ -73,7 +73,7 @@ def describe_battle(name1, spell1, name2, spell2, winner):
         frequency_penalty=0,
         presence_penalty=0,
     )
-    answer = response.choices[0].message['content']
+    answer = response.choices[0].message.content
     return answer
 
 WIZARD_NAMES = [
